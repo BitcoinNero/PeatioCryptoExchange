@@ -11,16 +11,13 @@ sudo apt-get -y install libxml2-dev libxslt1-dev libcurl4-openssl-dev
 sudo apt-get -y install python-software-properties libffi-dev imagemagick gsfonts
 sudo apt-get -y install rabbitmq-server 
 sudo apt-get -y install redis-server nodejs
+sudo apt-get -y install  mysql-server  mysql-client  libmysqlclient-dev
 sudo rabbitmq-plugins enable rabbitmq_management
 sudo service rabbitmq-server restart
 wget http://localhost:15672/cli/rabbitmqadmin
 chmod +x rabbitmqadmin
 sudo mv rabbitmqadmin /usr/local/sbin
 
-echo -e "\n\n"
-echo -e "\033[34;7mMySQL Intalll\e[0m"
-
-sudo apt-get -y install  mysql-server  mysql-client  libmysqlclient-dev
 
 echo -e "\n\n"
 echo -e "\033[34;7mRuby Install\e[0m"
