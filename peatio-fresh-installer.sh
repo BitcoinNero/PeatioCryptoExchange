@@ -12,9 +12,7 @@ sudo apt-get -y install libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sq
 sudo apt-get -y install libxml2-dev libxslt1-dev libcurl4-openssl-dev
 sudo apt-get -y install python-software-properties libffi-dev imagemagick gsfonts
 sudo apt-get -y install rabbitmq-server 
-sudo apt-get -y install redis-server 
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install nodejs
+sudo apt-get -y install redis-server nodejs
 sudo rabbitmq-plugins enable rabbitmq_management
 sudo service rabbitmq-server restart
 wget http://localhost:15672/cli/rabbitmqadmin
