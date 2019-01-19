@@ -17,7 +17,7 @@ echo -e "\033[34;7mRuby\e[0m"
 
 git clone git://github.com/sstephenson/rbenv.git .rbenv && git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 echo 'export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bash_profile && echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
-source ~/.bash_profile && rbenv install --verbose 2.3.0 && rbenv global 2.3.0
+source ~/.bash_profile && rbenv install --verbose 2.2.2 && rbenv global 2.2.2
 echo "gem: --no-document" > ~/.gemrc && gem install bundler  -v '1.17.3' && rbenv rehash
 
 echo -e "\n\n"
