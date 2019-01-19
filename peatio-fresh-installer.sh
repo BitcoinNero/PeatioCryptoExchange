@@ -53,11 +53,6 @@ git clone https://github.com/algobasket/PeatioCryptoExchange.git .
 bundle install --without development test --path vendor/bundle
 bin/init_config
 
-sudo sed -i "s+YOUR_PUSHER_APP+594243+g" config/application.yml
-sudo sed -i "s+YOUR_PUSHER_KEY+155f063acccd16c2f04d+g" config/application.yml
-sudo sed -i "s+YOUR_PUSHER_SECRET+326c0ae14849b6c6bff5+g" config/application.yml
-
-
 echo "ENTER YOUR SSH IP OR DOMAIN NAME : " sship
 read sship
 sudo sed -i "s+URL_HOST: localhost:3000+URL_HOST:${sship}+g" config/application.yml
@@ -71,34 +66,12 @@ sed -i "s+username: root+username: ${mysqlusername}@+g" config/database.yml
 echo "Enter MySQL Password: " mysqlpassword
 read mysqlpassword
 sed -i "s+password:+password: ${mysqlpassword}@+g" config/database.yml
-
-echo -e "\n\n"
-echo -e "\033[34;7mInitialize the database and load the seed data\e[0m"
-bundle exec rake db:setup
-
-echo -e "\n\n"
-echo -e "\033[34;7mPrecompile assets\e[0m"
-bundle exec rake assets:precompile
-
-echo -e "\n\n"
-echo -e "\033[34;7mRunning Daemons\e[0m"
-#bundle exec rake daemons:start
-
-echo -e "\n\n"
-echo -e "\033[34;7mRunning Daemons\e[0m"
-#TRADE_EXECUTOR=4 rake daemons:start
-
-echo -e "\n\n"
-echo -e "\033[34;7mPassenger Setting\e[0m"
 sudo rm /etc/nginx/sites-enabled/default
 sudo ln -s /home/deploy/peatio/config/nginx.conf /etc/nginx/conf.d/peatio.conf
 sudo service nginx restart
-
-echo -e "\n\n"
-echo -e "\033[34;7mLiability Proof - Add this rake task to your crontab so it runs regularly\e[0m"
-
+bundle exec rake db:setup
+bundle exec rake assets:precompile
+bundle exec rake daemons:start
+TRADE_EXECUTOR=4 rake daemons:start
 RAILS_ENV=production rake solvency:liability_proof
-
-echo 'THANKS FOR INSTALLING PEATIO ENJOY !! CONTACT US ON SKYPE : algobasket | EMAIL : algobasket@gmail.com' | boxes -d peek -a c -s 40x11
-echo -e "\n\n"
-echo 'Donate us at paypal : algobasket@gmail.com for future contribution' | boxes -d shell -p a1l2
+bundle exec rails server
