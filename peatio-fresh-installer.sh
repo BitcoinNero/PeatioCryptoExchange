@@ -11,9 +11,24 @@ sudo apt-get -y install git-core curl zlib1g-dev build-essential boxes
 sudo apt-get -y install libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3
 sudo apt-get -y install libxml2-dev libxslt1-dev libcurl4-openssl-dev
 sudo apt-get -y install python-software-properties libffi-dev imagemagick gsfonts
-sudo apt-get -y install rabbitmq-server redis-server mysql-server  mysql-client  libmysqlclient-dev
+sudo apt-get -y install rabbitmq-server 
+sudo apt-get -y install redis-server 
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install nodejs
+sudo rabbitmq-plugins enable rabbitmq_management
+sudo service rabbitmq-server restart
+wget http://localhost:15672/cli/rabbitmqadmin
+chmod +x rabbitmqadmin
+sudo mv rabbitmqadmin /usr/local/sbin
+
+echo -e "\n\n"
+echo -e "\033[34;7mMySQL Intalll\e[0m"
+
+sudo apt-get -y install  mysql-server  mysql-client  libmysqlclient-dev
+
+echo -e "\n\n"
+echo -e "\033[34;7mRuby Install\e[0m"
+
 git clone git://github.com/sstephenson/rbenv.git .rbenv
 git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 echo 'export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bash_profile
@@ -24,11 +39,7 @@ rbenv global 2.2.2
 echo "gem: --no-document" > ~/.gemrc
 gem install bundler  -v '1.17.3'
 rbenv rehash
-sudo rabbitmq-plugins enable rabbitmq_management
-sudo service rabbitmq-server restart
-wget http://localhost:15672/cli/rabbitmqadmin
-chmod +x rabbitmqadmin
-sudo mv rabbitmqadmin /usr/local/sbin
+
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
 sudo apt-get install -y apt-transport-https ca-certificates
 sudo sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger xenial main > /etc/apt/sources.list.d/passenger.list'
