@@ -38,30 +38,32 @@ sudo sed -i 's+# include /etc/nginx/passenger.conf;+include /etc/nginx/passenger
 echo -e "\n\n"
 echo -e "\033[34;7mInstall\e[0m"
 
+git clone https://github.com/BitcoinNero/PeatioCryptoExchange.git peatio && cd peatio
 echo "export RAILS_ENV=production" >> ~/.bashrc
 source ~/.bashrc
-mkdir -p ~/peatio
-cd peatio
-git clone https://github.com/BitcoinNero/PeatioCryptoExchange.git .
 bundle install --without development test --path vendor/bundle
 bin/init_config
 
-echo "ENTER YOUR SSH IP OR DOMAIN NAME : " sship
-read sship
-sudo sed -i "s+URL_HOST: localhost:3000+URL_HOST:${sship}+g" config/application.yml
 
-echo "USE http or https : " protocol
-read protocol
-sed -i "s+URL_SCHEMA: http+URL_SCHEMA: ${protocol}+g" config/application.yml
-echo "Enter MySQL Username: " mysqlusername
-read mysqlusername
-sed -i "s+username: root+username: ${mysqlusername}@+g" config/database.yml
+echo -e "\n\n"
+echo -e "\033[34;7mConfig\e[0m"
+
+
 echo "Enter MySQL Password: " mysqlpassword
 read mysqlpassword
 sed -i "s+password:+password: ${mysqlpassword}@+g" config/database.yml
+
+echo -e "\n\n"
+echo -e "\033[34;7mNginx\e[0m"
+
 sudo rm /etc/nginx/sites-enabled/default
-sudo ln -s /home/deploy/peatio/config/nginx.conf /etc/nginx/conf.d/peatio.conf
+sudo ln -s /root/peatio/config/nginx.conf /etc/nginx/conf.d/peatio.conf
 sudo service nginx restart
+
+echo -e "\n\n"
+echo -e "\033[34;7mStart\e[0m"
+
+
 bundle exec rake db:setup
 bundle exec rake assets:precompile
 bundle exec rake daemons:start
