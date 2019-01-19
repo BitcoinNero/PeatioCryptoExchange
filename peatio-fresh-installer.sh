@@ -5,7 +5,7 @@ echo -e "\033[34;7mBuild\e[0m"
 
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get -y install git-core curl zlib1g-dev build-essential boxes
+sudo apt-get -y install git-core curl zlib1g-dev build-essential boxes rbenv
 sudo apt-get -y install libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3
 sudo apt-get -y install libxml2-dev libxslt1-dev libcurl4-openssl-dev
 sudo apt-get -y install python-software-properties libffi-dev imagemagick gsfonts
